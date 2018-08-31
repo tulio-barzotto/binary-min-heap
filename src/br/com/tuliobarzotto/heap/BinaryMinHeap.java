@@ -59,6 +59,32 @@ public class BinaryMinHeap {
 
     }
 
+    public void insert(int value) {
+        if (heapSize == data.length) {
+            throw new HeapException("Heap está cheia!");
+        } else {
+            heapSize++;
+            data[heapSize - 1] = value;
+            siftUp(heapSize - 1);
+        }
+    }
+
+    private void siftUp(int nodeIndex) {
+
+        int parentIndex;
+        int tmp;
+
+        if (nodeIndex != 0) {
+            parentIndex = getParentIndex(nodeIndex);
+            if (data[parentIndex] > data[nodeIndex]) {
+                tmp = data[parentIndex];
+                data[parentIndex] = data[nodeIndex];
+                data[nodeIndex] = tmp;
+                siftUp(parentIndex);
+            }
+        }
+    }
+
 
 
     public class HeapException extends RuntimeException {
